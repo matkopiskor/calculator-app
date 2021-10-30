@@ -1,7 +1,23 @@
-import { FC } from 'react';
+import { FC, useCallback, useMemo } from 'react';
+import { Button as IButton } from '../../utils/constants';
+import styles from './styles.module.css';
 
-export const Button: FC = () => {
+interface IButtonProps {
+    button: IButton;
+    performAction: (type: 'symbol' | 'action', label: string, actionKey?: string) => void;
+}
+
+export const Button: FC<IButtonProps> = ({
+    button,
+    performAction,
+}) => {
+
+    const onButtonClick = useCallback(() => {
+        const actionKey = button.type === 'action' ? button.actionKey : undefined;
+        performAction(button.type, button.label, actionKey);
+    }, [button, performAction]);
+
     return (
-        <div>a</div>
+        <div onClick={onButtonClick} className={`${styles.button} ${styles[button.type]}`}>{button.label}</div>
     );
 };

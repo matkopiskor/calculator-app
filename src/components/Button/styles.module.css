@@ -1,0 +1,39 @@
+.button {
+    cursor: pointer;
+    width: 100%;
+    border: 1px solid gray;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 32px;
+}
+
+.button:hover {
+    filter: brightness(110%);
+}
+
+.button.symbol {
+    background-color: whitesmoke;
+}
+
+.button.action {
+    background-color: lightsteelblue;
+}
+
+.button.action.first {
+    border-radius: 4px 4px 0 0;
+    border-bottom: none;
+}
+
+.button.action.middle {
+    border-radius: 0;
+    border-top: none;
+    border-bottom: none;
+}
+
+.button.action.last {
+    border-radius: 0 0 4px 4px;
+    border-top: none;
+}
+

@@ -23,7 +23,7 @@ export const CalculatorProvider: FC = ({ children }) => {
     );
 };
 
-export const useCalculateExpression = () => {
+export const useCalculator = () => {
     const { expression, setExpression, cursorPosition, setCursorPosition } = useContext(CalculatorContext);
 
     const updateValue = useCallback(
