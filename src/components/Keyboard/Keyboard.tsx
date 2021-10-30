@@ -1,10 +1,10 @@
 import { FC } from 'react';
 import styles from './styles.module.css';
-import { FirstSegList, NumSegList, SecondSegList, ActionSegList } from '../../utils/constants';
+import { FirstSegList, NumSegList, SecondSegList, ActionSegList, ActionKey } from '../../utils/constants';
 import { Button } from '../Button/Button';
 
 interface IKeyboardProps {
-    performAction: (type: 'symbol' | 'action', label: string, actionKey?: string) => void;
+    performAction: (type: 'symbol' | 'action', label: string, actionKey?: ActionKey) => void;
 }
 
 export const Keyboard: FC<IKeyboardProps> = ({ performAction }) => {

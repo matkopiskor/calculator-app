@@ -8,6 +8,8 @@ interface ICalculatorContext {
     setExpression: (expression: string) => void;
     cursorPosition: number;
     setCursorPosition: (position: number) => void;
+    error: boolean;
+    setError: (error: boolean) => void;
 }
 
 const CalculatorContext = createContext<ICalculatorContext>({} as ICalculatorContext);
@@ -15,21 +17,36 @@ const CalculatorContext = createContext<ICalculatorContext>({} as ICalculatorCon
 export const CalculatorProvider: FC = ({ children }) => {
     const [expression, setExpression] = useState<string>('');
     const [cursorPosition, setCursorPosition] = useState<number>(0);
+    const [error, setError] = useState<boolean>(false);
 
     return (
-        <CalculatorContext.Provider value={{ expression, setExpression, cursorPosition, setCursorPosition }}>
+        <CalculatorContext.Provider
+            value={{ expression, setExpression, cursorPosition, setCursorPosition, error, setError }}
+        >
             {children}
         </CalculatorContext.Provider>
     );
 };
 
 export const useCalculator = () => {
-    const { expression, setExpression, cursorPosition, setCursorPosition } = useContext(CalculatorContext);
+    const { expression, setExpression, cursorPosition, setCursorPosition, error, setError } = useContext(CalculatorContext);
+
+    const moveCursorLeft = useCallback(() => {
+        if (cursorPosition !== 0) {
+            setCursorPosition(cursorPosition - 1);
+        }
+    }, [cursorPosition, setCursorPosition]);
+
+    const moveCursorRight = useCallback(() => {
+        if (cursorPosition !== expression.length) {
+            setCursorPosition(cursorPosition + 1);
+        }
+    }, [cursorPosition, expression.length, setCursorPosition]);
 
     const updateValue = useCallback(
         (symbol: string, position?: number) => {
             if (!position || position === expression.length) {
-                const currPosition = expression.length
+                const currPosition = expression.length;
                 setExpression(expression + symbol);
                 setCursorPosition(currPosition + 1);
             } else if (position < expression.length) {
@@ -72,23 +89,27 @@ export const useCalculator = () => {
     );
 
     const encodeExpression = useCallback((currentExpression: string) => {
-        const encodedExpression = encodeURI(currentExpression);
-        console.log('encodedExpression', encodedExpression);
+        const encodedExpression = encodeURIComponent(currentExpression);
         return encodedExpression;
     }, []);
 
     const calculateExpression = useCallback(async () => {
-        const encodedExpression = encodeExpression(expression);
-        const url = baseUrl + encodedExpression;
-        try {
-            const result: string = await axios.get(url);
-            console.log('result', result);
-            showResult(result);
-        } catch (error) {
-            console.error('Error occured: ', error);
-            throw new Error('Something went wrong during calculation');
+        if (expression !== '') {
+            const encodedExpression = encodeExpression(expression);
+            const url = baseUrl + encodedExpression;
+            try {
+                const result = await axios.get(url);
+                showResult(result.data.toString());
+                setError(false);
+            } catch {
+                setError(true);
+            }
         }
-    }, [encodeExpression, expression, showResult]);
+    }, [encodeExpression, expression, setError, showResult]);
+
+    const clearError = useCallback(() => {
+        setError(false);
+    }, [setError]);
 
     return {
         expression,
@@ -97,5 +118,9 @@ export const useCalculator = () => {
         deleteSymbol,
         calculateExpression,
         cursorPosition,
+        moveCursorLeft,
+        moveCursorRight,
+        error,
+        clearError,
     };
 };

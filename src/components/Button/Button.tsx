@@ -1,10 +1,10 @@
-import { FC, useCallback, useMemo } from 'react';
-import { Button as IButton } from '../../utils/constants';
+import { FC, useCallback } from 'react';
+import { ActionKey, Button as IButton } from '../../utils/constants';
 import styles from './styles.module.css';
 
 interface IButtonProps {
     button: IButton;
-    performAction: (type: 'symbol' | 'action', label: string, actionKey?: string) => void;
+    performAction: (type: 'symbol' | 'action', label: string, actionKey?: ActionKey) => void;
 }
 
 export const Button: FC<IButtonProps> = ({
