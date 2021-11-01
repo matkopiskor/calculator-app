@@ -13,7 +13,7 @@ export type ActionKey = 'MOVE_LEFT' | 'MOVE_RIGHT' | 'DELETE' | 'CALC' | 'RESET'
 
 export type Button = IButtonSymbol | IButtonAction
 
-export const FirstSegList: Button[] = [
+export const FirstSegmentList: Button[] = [
     {
         type: 'symbol',
         label: '(',
@@ -34,7 +34,7 @@ export const FirstSegList: Button[] = [
     }
 ];
 
-export const SecondSegList: Button[] = [
+export const SecondSegmentList: Button[] = [
     {
         type: 'symbol',
         label: '/',
@@ -53,7 +53,7 @@ export const SecondSegList: Button[] = [
     },
 ];
 
-export const NumSegList: Button[] = [
+export const ThirdSegmentList: Button[] = [
     {
         type: 'symbol',
         label: '7',
@@ -105,7 +105,7 @@ export const NumSegList: Button[] = [
     },
 ];
 
-export const ActionSegList: Button[] = [
+export const FourthSegmentList: Button[] = [
     {
         type: 'action',
         label: 'DEL',

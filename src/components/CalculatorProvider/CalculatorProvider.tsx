@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { FC, createContext, useState, useCallback, useContext } from 'react';
 
-const baseUrl = 'http://api.mathjs.org/v4/?expr=';
+const baseUrl = 'https://api.mathjs.org/v4/?expr=';
 
 interface ICalculatorContext {
     expression: string;

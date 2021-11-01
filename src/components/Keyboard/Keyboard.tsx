@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import styles from './styles.module.css';
-import { FirstSegList, NumSegList, SecondSegList, ActionSegList, ActionKey } from '../../utils/constants';
+import { FirstSegmentList, ThirdSegmentList, SecondSegmentList, FourthSegmentList, ActionKey } from '../../utils/constants';
 import { Button } from '../Button/Button';
 
 interface IKeyboardProps {
@@ -10,24 +10,24 @@ interface IKeyboardProps {
 export const Keyboard: FC<IKeyboardProps> = ({ performAction }) => {
     return (
         <div className={styles.keyboard}>
-            <div className={styles.firstSeg}>
-                {FirstSegList.map((button, idx) => (
+            <div className={styles.firstSegment}>
+                {FirstSegmentList.map((button, idx) => (
                     <Button key={idx} button={button} performAction={performAction} />
                 ))}
             </div>
-            <div className={styles.secondSeg}>
-                {SecondSegList.map((button, idx) => (
+            <div className={styles.secondSegment}>
+                {SecondSegmentList.map((button, idx) => (
                     <Button key={idx} button={button} performAction={performAction} />
                 ))}
             </div>
-            <div className={styles.thirdSeg}>
-                <div className={styles.numSeg}>
-                    {NumSegList.map((button, idx) => (
+            <div className={styles.thirdAndFourthSegment}>
+                <div className={styles.thirdSegment}>
+                    {ThirdSegmentList.map((button, idx) => (
                         <Button key={idx} button={button} performAction={performAction} />
                     ))}
                 </div>
-                <div className={styles.actionSeg}>
-                    {ActionSegList.map((button, idx) => (
+                <div className={styles.fourthSegment}>
+                    {FourthSegmentList.map((button, idx) => (
                         <Button key={idx} button={button} performAction={performAction} />
                     ))}
                 </div>

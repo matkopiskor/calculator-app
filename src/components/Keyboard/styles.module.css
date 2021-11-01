@@ -12,30 +12,30 @@
         "third third third third"
 }
 
-.firstSeg {
+.firstSegment {
     display: grid;
     grid-area: first;
     grid-template-columns: repeat(4, 1fr);
 }
 
-.secondSeg {
+.secondSegment {
     display: grid;
     grid-area: second;
     grid-template-columns: repeat(4, 1fr);
 }
 
-.thirdSeg {
+.thirdAndFourthSegment {
     display: grid;
     grid-area: third;
     grid-template-columns: 3fr 1fr;
 }
 
-.numSeg {
+.thirdSegment {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
 }
 
-.actionSeg {
+.fourthSegment {
     display: grid;
     grid-template-rows: 1fr 3fr;
 }
